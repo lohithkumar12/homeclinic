@@ -1,0 +1,1 @@
+# Public assets placeholder — Next may not require a public folder, but Docker COPY expects it.
