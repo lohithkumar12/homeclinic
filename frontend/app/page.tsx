@@ -14,59 +14,80 @@ export default async function HomePage() {
   }
 
   return (
-    <main>
-      <div className="container">
-        <header className="site-header">
-          <Link className="brand" href="/">
-            {clinicName}
+    <main className="home">
+      <header className="topbar">
+        <div className="container topbar-inner">
+          <Link className="topbar-brand" href="/">
+            <span className="logo-mark" aria-hidden>
+              +
+            </span>
+            <span className="logo-text">{clinicName}</span>
           </Link>
-          <nav className="nav-row">
-            <a className="nav-link" href="#doctors">
-              Our doctors
+          <nav className="topbar-nav">
+            <a className="topbar-link" href="#doctors">
+              Doctors
             </a>
-            <Link className="nav-link" href="/admin/login">
-              Clinic login
+            <a className="topbar-link" href="#how">
+              How it works
+            </a>
+            {clinicPhone && clinicPhone !== "9XXXXXXXXX" && (
+              <a className="topbar-link" href={`tel:${clinicPhone}`}>
+                Call
+              </a>
+            )}
+            <Link className="btn btn-primary btn-sm topbar-cta" href="/consult">
+              Start Consultation
             </Link>
           </nav>
-        </header>
+        </div>
+      </header>
 
-        <section className="hero hero-home">
-          <div className="hero-copy">
-            <p className="trust-pill">Care from registered doctors</p>
-            <h1>{clinicName}</h1>
-            <p className="tagline">Healthcare from the comfort of your home</p>
-            <p className="lead">Tell us your problem. A doctor from our clinic will guide the next step.</p>
+      <section className="hero-stage">
+        <div className="hero-stage-bg" aria-hidden />
+        <div className="container hero-stage-grid">
+          <div className="hero-stage-copy">
+            <p className="hero-kicker">Registered doctors · Phone consultation</p>
+            <h1 className="hero-brand">{clinicName}</h1>
+            <p className="hero-support">
+              Healthcare from the comfort of your home. Tell us your problem — a doctor from our
+              clinic will guide the next step.
+            </p>
             <div className="hero-actions">
-              <Link className="btn btn-primary btn-glow" href="/consult">
+              <Link className="btn btn-primary btn-lg btn-glow" href="/consult">
                 Start Consultation
               </Link>
-              {clinicPhone && clinicPhone !== "9XXXXXXXXX" ? (
-                <a className="btn btn-ghost" href={`tel:${clinicPhone}`}>
-                  Call clinic
-                </a>
-              ) : (
-                <a className="btn btn-ghost" href="#doctors">
-                  Meet our doctors
-                </a>
-              )}
+              <a className="btn btn-light btn-lg" href="#doctors">
+                Meet our doctors
+              </a>
             </div>
-            <ul className="trust-points">
-              <li>Doctor-reviewed requests</li>
-              <li>Phone consultation</li>
-              <li>Clinic-led care</li>
-            </ul>
           </div>
-        </section>
-      </div>
+
+          <div className="hero-stage-visual" aria-label="Our doctors">
+            <div className="hero-photo-stack">
+              {doctors.slice(0, 3).map((doc, i) => (
+                <div key={doc.id} className={`hero-photo hero-photo-${i + 1}`}>
+                  {doc.photo ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={doc.photo} alt={doc.name} />
+                  ) : (
+                    <span>{doc.initials}</span>
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="hero-trust-card">
+              <strong>Doctor-led care</strong>
+              <p>Every request is reviewed by a registered medical practitioner.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="section doctors-section" id="doctors">
         <div className="container">
           <div className="section-head">
-            <h2>Trusted doctors behind your care</h2>
-            <p className="muted">
-              Every consultation is handled by a registered medical practitioner from our clinic
-              network.
-            </p>
+            <h2>Our doctors</h2>
+            <p className="muted">The clinic team patients speak with — real doctors, real care.</p>
           </div>
           <div className="doctor-grid">
             {doctors.map((doc, i) => (
@@ -83,26 +104,23 @@ export default async function HomePage() {
                     <span>{doc.initials}</span>
                   )}
                 </div>
-                <h3>{doc.name}</h3>
-                <p className="doctor-title">
-                  {doc.title} · {doc.specialty}
-                </p>
+                <div>
+                  <h3>{doc.name}</h3>
+                  <p className="doctor-title">
+                    {doc.title} · {doc.specialty}
+                  </p>
+                </div>
               </article>
             ))}
-          </div>
-          <div className="section-cta">
-            <Link className="btn btn-primary btn-glow" href="/consult">
-              Talk to our clinic
-            </Link>
           </div>
         </div>
       </section>
 
-      <section className="section how-section">
+      <section className="section how-section" id="how">
         <div className="container">
           <div className="section-head">
             <h2>How it works</h2>
-            <p className="muted">Simple steps from your phone to a doctor callback.</p>
+            <p className="muted">From your phone to a doctor callback — in three steps.</p>
           </div>
           <div className="steps">
             <div className="step-card">
@@ -121,17 +139,30 @@ export default async function HomePage() {
               <p>A registered doctor contacts you for a phone consultation.</p>
             </div>
           </div>
+          <div className="section-cta">
+            <Link className="btn btn-primary btn-glow" href="/consult">
+              Start Consultation
+            </Link>
+          </div>
         </div>
       </section>
 
       <footer className="site-footer">
         <div className="container footer-inner">
-          <strong className="brand">{clinicName}</strong>
+          <div className="footer-brand-row">
+            <span className="logo-mark" aria-hidden>
+              +
+            </span>
+            <strong className="logo-text">{clinicName}</strong>
+          </div>
           <p className="muted">Your local doctor, from your home.</p>
           <p className="footer-note muted">
             For severe or life-threatening symptoms, call <a href="tel:108">108</a> or go to the
             nearest hospital.
           </p>
+          <Link className="footer-admin" href="/admin/login">
+            Clinic staff login
+          </Link>
         </div>
       </footer>
     </main>

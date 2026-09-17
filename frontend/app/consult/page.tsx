@@ -137,16 +137,22 @@ export default function ConsultPage() {
   };
 
   return (
-    <main className="container page">
-      <header className="site-header">
-        <Link className="brand" href="/">
-          {clinicName}
-        </Link>
-        <Link className="nav-link" href="/">
-          Back home
-        </Link>
+    <main>
+      <header className="topbar">
+        <div className="container topbar-inner">
+          <Link className="topbar-brand" href="/">
+            <span className="logo-mark" aria-hidden>
+              +
+            </span>
+            <span className="logo-text">{clinicName}</span>
+          </Link>
+          <Link className="topbar-link" href="/">
+            Back home
+          </Link>
+        </div>
       </header>
 
+      <div className="container page">
       <div className="stack consult-wrap">
         <div className="consult-intro">
           <p className="trust-pill">Doctor will call you</p>
@@ -302,6 +308,7 @@ export default function ConsultPage() {
             )}
           </div>
         </form>
+      </div>
       </div>
 
       {showEmergency && (
