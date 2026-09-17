@@ -1,1 +1,5 @@
-# Add doctor photos here, then set photo: "/doctors/yourfile.jpg" in lib/doctors.ts
+# Place doctor photos here, then set photo: "/doctors/filename.jpg" in lib/doctors.ts
+#
+# Example:
+#   ravi.jpg  -> photo: "/doctors/ravi.jpg"
+#   priya.jpg -> photo: "/doctors/priya.jpg"
