@@ -20,28 +20,30 @@ export default async function SuccessPage({ searchParams }: Props) {
         </Link>
       </header>
 
-      <div className="panel stack" style={{ maxWidth: 640, margin: "2rem auto" }}>
-        <h1>Your request has been received</h1>
+      <div className="panel stack success-panel">
+        <p className="trust-pill">Request received</p>
+        <h1>A doctor from our clinic will contact you</h1>
         <p className="muted">Consultation ID</p>
         <p className="success-id">{id}</p>
         {urgent && (
           <div className="alert alert-urgent">
-            Marked urgent. Please seek emergency care if symptoms are severe. Our clinic will also try
-            to contact you.
+            Marked urgent. If symptoms are severe, call 108 or go to the nearest hospital. Our clinic
+            will also try to reach you soon.
           </div>
         )}
-        <p>Our clinic team will contact you shortly for a phone consultation.</p>
-        <p>
-          <strong>Clinic:</strong> {phone}
-          <br />
-          <strong>Available:</strong> {hours}
-        </p>
-        <div className="alert alert-warn">
-          For emergencies, contact your nearest emergency service immediately (108 / 112). This
-          confirmation is not medical advice and not an emergency response.
+        <p>Our clinic team will call you shortly for a phone consultation.</p>
+        <div className="success-meta">
+          <div>
+            <span className="muted">Clinic</span>
+            <strong>{phone}</strong>
+          </div>
+          <div>
+            <span className="muted">Available</span>
+            <strong>{hours}</strong>
+          </div>
         </div>
         <div className="actions">
-          <Link className="btn btn-primary" href="/">
+          <Link className="btn btn-primary btn-glow" href="/">
             Back to home
           </Link>
           <a className="btn btn-secondary" href={`tel:${phone}`}>
