@@ -112,10 +112,7 @@ export function HeroDoctorStack() {
           </button>
         ))}
       </div>
-      <div className="hero-trust-card">
-        <strong>Doctor-led care</strong>
-        <p>Tap a doctor photo to see their profile. Every request is reviewed by a registered practitioner.</p>
-      </div>
+      <p className="hero-photo-hint">Tap a doctor to view their profile</p>
     </div>
   );
 }
