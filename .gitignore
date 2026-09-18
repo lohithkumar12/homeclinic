@@ -14,3 +14,7 @@ __pycache__/
 .DS_Store
 .idea/
 .vscode/
+certbot/conf/**
+certbot/www/**
+!certbot/conf/.gitkeep
+!certbot/www/.gitkeep
