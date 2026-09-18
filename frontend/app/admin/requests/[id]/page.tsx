@@ -87,7 +87,8 @@ export default function RequestDetailPage() {
             {data.red_flag && <span className="badge badge-urgent">Urgent</span>}
           </h1>
           <p className="muted">
-            Age {p.age} · {p.gender.replaceAll("_", " ")} · {p.phone}
+            {p.age > 0 ? `Age ${p.age} · ` : ""}
+            {p.phone}
             {p.location ? ` · ${p.location}` : ""}
           </p>
         </div>
@@ -101,7 +102,9 @@ export default function RequestDetailPage() {
         <div className="panel stack">
           <h2>Complaint</h2>
           <p>{data.complaint}</p>
-          <p className="muted">Duration: {data.duration}</p>
+          {data.duration && data.duration !== "not specified" && (
+            <p className="muted">Duration: {data.duration}</p>
+          )}
           {data.symptoms && (
             <>
               <h2>Symptoms</h2>

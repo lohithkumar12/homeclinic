@@ -67,14 +67,14 @@ def triage_check(payload: TriageCheckRequest):
 @router.post("/intake", response_model=IntakeSuccess)
 async def create_intake(
     name: str = Form(...),
-    age: int = Form(...),
-    gender: Gender = Form(...),
     phone: str = Form(...),
     complaint: str = Form(...),
-    duration: str = Form(...),
     consent: str = Form(...),
-    location: str | None = Form(None),
     symptoms: str | None = Form(None),
+    age: int | None = Form(None),
+    gender: Gender | None = Form(None),
+    duration: str | None = Form(None),
+    location: str | None = Form(None),
     medications: str | None = Form(None),
     allergies: str | None = Form(None),
     previous_conditions: str | None = Form(None),
@@ -85,12 +85,14 @@ async def create_intake(
 ):
     if not _as_bool(consent):
         raise HTTPException(status_code=400, detail="Consent is required")
-    if age < 0 or age > 120:
-        raise HTTPException(status_code=400, detail="Invalid age")
+    if not name.strip():
+        raise HTTPException(status_code=400, detail="Name is required")
     if not phone.strip() or len(phone.strip()) < 8:
         raise HTTPException(status_code=400, detail="Valid phone number is required")
-    if not complaint.strip() or not duration.strip():
-        raise HTTPException(status_code=400, detail="Complaint and duration are required")
+    if not complaint.strip():
+        raise HTTPException(status_code=400, detail="Problem / complaint is required")
+    if age is not None and (age < 0 or age > 120):
+        raise HTTPException(status_code=400, detail="Invalid age")
 
     red_flag, reasons = check_red_flags(complaint, symptoms or "")
     if red_flag and not _as_bool(acknowledge_emergency):
@@ -108,8 +110,8 @@ async def create_intake(
 
     patient = Patient(
         name=name.strip(),
-        age=age,
-        gender=gender,
+        age=age if age is not None else 0,
+        gender=gender or Gender.prefer_not_to_say,
         phone=phone.strip(),
         location=(location or "").strip() or None,
     )
@@ -120,7 +122,7 @@ async def create_intake(
         public_id=public_id,
         patient_id=patient.id,
         complaint=complaint.strip(),
-        duration=duration.strip(),
+        duration=(duration or "").strip() or "not specified",
         symptoms=(symptoms or "").strip() or None,
         medications=(medications or "").strip() or None,
         allergies=(allergies or "").strip() or None,
