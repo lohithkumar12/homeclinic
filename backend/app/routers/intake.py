@@ -184,6 +184,7 @@ async def create_intake(
         patient_name=patient.name,
         phone=patient.phone,
         complaint=request.complaint,
+        symptoms=request.symptoms or "",
         priority=priority.value,
         red_flag=red_flag,
     )

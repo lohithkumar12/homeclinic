@@ -116,6 +116,9 @@ Until HTTPS is on, treat the IP URL as staging only.
 - [ ] Changed `ADMIN_PASSWORD` and `SECRET_KEY`  
 - [ ] Changed `POSTGRES_PASSWORD`  
 - [ ] Set real `CLINIC_PHONE` / `CLINIC_HOURS`  
+- [ ] Set `CLINIC_NOTIFY_PHONE=+918143329173` for doctor alerts  
+- [ ] Configure Twilio SMS (see [`docs/NOTIFICATIONS.md`](./docs/NOTIFICATIONS.md))  
+- [ ] WhatsApp later when Business/sandbox sender is ready  
 - [ ] `.env` is on the VM only (never committed)  
 - [ ] Separate VM from trading bots  
 - [ ] Phase 0 doctor / consent docs filled  

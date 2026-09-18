@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     clinic_phone: str = "9XXXXXXXXX"
     clinic_hours: str = "9 AM – 8 PM"
     clinic_notify_email: str = ""
+    # Uncle / clinic doctor phone for SMS + WhatsApp (E.164, e.g. +918143329173)
+    clinic_notify_phone: str = ""
 
     database_url: str = "sqlite:///./homeclinic.db"
     secret_key: str = "change-me-in-production-homeclinic-secret"
@@ -27,6 +29,12 @@ class Settings(BaseSettings):
     smtp_user: str = ""
     smtp_password: str = ""
     smtp_from: str = ""
+
+    # Twilio — SMS works with a normal Twilio number; WhatsApp needs sandbox or Business sender
+    twilio_account_sid: str = ""
+    twilio_auth_token: str = ""
+    twilio_sms_from: str = ""  # e.g. +1XXXXXXXXXX
+    twilio_whatsapp_from: str = ""  # e.g. whatsapp:+14155238886 (sandbox) or approved WA number
 
     @property
     def cors_origins_list(self) -> list[str]:
