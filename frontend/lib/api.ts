@@ -119,6 +119,8 @@ export function clearToken() {
   localStorage.removeItem("hc_admin_token");
 }
 
+import { resolveAdminLoginPath } from "@/lib/admin";
+
 async function adminFetch(path: string, init: RequestInit = {}) {
   const token = getToken();
   const headers = new Headers(init.headers);
@@ -129,7 +131,9 @@ async function adminFetch(path: string, init: RequestInit = {}) {
   const res = await fetch(`${API_BASE}${path}`, { ...init, headers });
   if (res.status === 401) {
     clearToken();
-    if (typeof window !== "undefined") window.location.href = "/admin/login";
+    if (typeof window !== "undefined") {
+      window.location.href = resolveAdminLoginPath();
+    }
   }
   return res;
 }

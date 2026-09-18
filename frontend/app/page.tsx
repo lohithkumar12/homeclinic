@@ -142,9 +142,6 @@ export default async function HomePage() {
               For severe or life-threatening symptoms, call <a href="tel:108">108</a> or go to the
               nearest hospital.
             </p>
-            <Link className="footer-admin" href="/admin/login">
-              Clinic staff login
-            </Link>
           </div>
         </footer>
       </main>

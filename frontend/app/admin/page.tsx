@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { RequestListItem, clearToken, getToken, listRequests } from "@/lib/api";
+import { resolveAdminLoginPath } from "@/lib/admin";
 
 function formatStatus(s: string) {
   return s.replaceAll("_", " ");
@@ -37,7 +38,7 @@ export default function AdminDashboardPage() {
 
   useEffect(() => {
     if (!getToken()) {
-      router.replace("/admin/login");
+      router.replace(resolveAdminLoginPath());
       return;
     }
     load();
@@ -57,7 +58,7 @@ export default function AdminDashboardPage() {
             type="button"
             onClick={() => {
               clearToken();
-              router.push("/admin/login");
+              router.push(resolveAdminLoginPath());
             }}
           >
             Log out

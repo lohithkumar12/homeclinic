@@ -55,11 +55,13 @@ services:
       context: ./frontend
       args:
         NEXT_PUBLIC_CLINIC_NAME: ${CLINIC_NAME:-HomeClinic}
+        NEXT_PUBLIC_ADMIN_LOGIN_SECRET: ${ADMIN_LOGIN_SECRET:-12345678901234567abcdsed}
         INTERNAL_API_URL: http://api:8000
     restart: unless-stopped
     environment:
       INTERNAL_API_URL: http://api:8000
       NEXT_PUBLIC_CLINIC_NAME: ${CLINIC_NAME:-HomeClinic}
+      NEXT_PUBLIC_ADMIN_LOGIN_SECRET: ${ADMIN_LOGIN_SECRET:-12345678901234567abcdsed}
     depends_on:
       - api
 

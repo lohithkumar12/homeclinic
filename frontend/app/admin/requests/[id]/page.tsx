@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { RequestDetail, getRequest, getToken, updateRequest } from "@/lib/api";
+import { resolveAdminLoginPath } from "@/lib/admin";
 
 export default function RequestDetailPage() {
   const params = useParams<{ id: string }>();
@@ -31,7 +32,7 @@ export default function RequestDetailPage() {
 
   useEffect(() => {
     if (!getToken()) {
-      router.replace("/admin/login");
+      router.replace(resolveAdminLoginPath());
       return;
     }
     if (!Number.isFinite(id)) return;
