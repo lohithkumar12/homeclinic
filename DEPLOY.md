@@ -102,10 +102,21 @@ docker compose down
 
 ## 6. HTTPS (do soon for real patients)
 
-1. Point a domain A-record to the VM IP  
-2. Install Certbot / use nginx + Let’s Encrypt  
-3. Update `CORS_ORIGINS` in `.env` to `https://yourdomain.com`  
-4. Redeploy: `docker compose up -d`
+See **[`docs/HTTPS.md`](./docs/HTTPS.md)**.
+
+```bash
+cd ~/homeclinic
+git pull
+bash scripts/setup_https.sh
+```
+
+Then set:
+
+```env
+CORS_ORIGINS=https://manadoctorhyd.com,https://www.manadoctorhyd.com
+```
+
+Share: **https://manadoctorhyd.com**
 
 Until HTTPS is on, treat the IP URL as staging only.
 
