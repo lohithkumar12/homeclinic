@@ -6,6 +6,7 @@ import {
   DoctorModalProvider,
   HeroDoctorStack,
 } from "@/components/DoctorsInteractive";
+import QuickIntakeForm from "@/components/QuickIntakeForm";
 
 export default async function HomePage() {
   let clinicName = process.env.NEXT_PUBLIC_CLINIC_NAME || "HomeClinic";
@@ -33,6 +34,9 @@ export default async function HomePage() {
               <a className="topbar-link" href="#doctors">
                 Doctors
               </a>
+              <a className="topbar-link" href="#consult-form">
+                Consult
+              </a>
               <a className="topbar-link" href="#how">
                 How it works
               </a>
@@ -41,9 +45,9 @@ export default async function HomePage() {
                   Call
                 </a>
               )}
-              <Link className="btn btn-primary btn-sm topbar-cta" href="/consult">
+              <a className="btn btn-primary btn-sm topbar-cta" href="#consult-form">
                 Start Consultation
-              </Link>
+              </a>
             </nav>
           </div>
         </header>
@@ -59,9 +63,9 @@ export default async function HomePage() {
                 clinic will guide the next step.
               </p>
               <div className="hero-actions">
-                <Link className="btn btn-primary btn-lg btn-glow" href="/consult">
+                <a className="btn btn-primary btn-lg btn-glow" href="#consult-form">
                   Start Consultation
-                </Link>
+                </a>
                 <a className="btn btn-light btn-lg" href="#doctors">
                   Meet our doctors
                 </a>
@@ -82,6 +86,23 @@ export default async function HomePage() {
           </div>
         </section>
 
+        <section className="section intake-section" id="consult">
+          <div className="container">
+            <div className="section-head">
+              <h2>Start consultation</h2>
+              <p className="muted">Four quick details — a clinic doctor will call you back.</p>
+            </div>
+            <div className="alert alert-soft" style={{ marginBottom: "1rem" }}>
+              If symptoms are severe (chest pain, difficulty breathing, heavy bleeding), call{" "}
+              <a href="tel:108">
+                <strong>108</strong>
+              </a>{" "}
+              immediately.
+            </div>
+            <QuickIntakeForm clinicName={clinicName} variant="home" />
+          </div>
+        </section>
+
         <section className="section how-section" id="how">
           <div className="container">
             <div className="section-head">
@@ -92,7 +113,7 @@ export default async function HomePage() {
               <div className="step-card">
                 <span className="step-num">1</span>
                 <h3>Share your concern</h3>
-                <p>Describe symptoms in a short form — takes a few minutes.</p>
+                <p>Fill the short form above with name, phone, problem and symptoms.</p>
               </div>
               <div className="step-card">
                 <span className="step-num">2</span>
@@ -104,11 +125,6 @@ export default async function HomePage() {
                 <h3>Doctor calls you</h3>
                 <p>A registered doctor contacts you for a phone consultation.</p>
               </div>
-            </div>
-            <div className="section-cta">
-              <Link className="btn btn-primary btn-glow" href="/consult">
-                Start Consultation
-              </Link>
             </div>
           </div>
         </section>
